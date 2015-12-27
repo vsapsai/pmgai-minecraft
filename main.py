@@ -39,8 +39,10 @@ class DistanceField(object):
             return c.MAT_DIRT
 
         # Anything that's not solid but under the sea level?
-        if y < 0:
+        if y < -2:
             return c.MAT_WATER
+        if y < 0:
+            return c.MAT_SNOW
 
         return c.MAT_AIR
 
