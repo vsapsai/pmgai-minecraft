@@ -39,8 +39,8 @@ class DistanceField(object):
         #nz = z
         #ny = y
 
-        # Manhattan distance field to center of map: floating iceberg.
-        if abs(nx) + abs(nz) + abs(ny*8) < 20:
+        # Distance field to center of map: floating iceberg.
+        if math.sqrt(nx*nx + nz*nz + 64*ny*ny) < 20:  # for comparison sqrt is not required
             return c.MAT_DIRT
 
         # Anything that's not solid but under the sea level?
