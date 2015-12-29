@@ -29,13 +29,18 @@ class DistanceField(object):
         x and z (int) are the lattitude and logitude in the map. 
         """ 
 
+        def safe_fmod(x, y):
+            return math.fmod(math.fabs(x), y) - y / 2.0
         # Add simple noise to the coordinates to make it less rigid!
-        nx = x + 2*math.sin(z/4.7)
-        nz = z + 2*math.cos(x/5.9)
+        nx = safe_fmod(x, 64.0) + 2*math.sin(z/4.7)
+        nz = safe_fmod(z, 64.0) + 2*math.cos(x/5.9)
         ny = y + math.sin(0.75 + x/7.8 + z/9.1)
+        #nx = math.fmod(math.fabs(x), 64.0) - 32.0
+        #nz = z
+        #ny = y
 
         # Manhattan distance field to center of map: floating iceberg.
-        if abs(nx) + abs(nz) + abs(ny*8) < 64:
+        if abs(nx) + abs(nz) + abs(ny*8) < 20:
             return c.MAT_DIRT
 
         # Anything that's not solid but under the sea level?
