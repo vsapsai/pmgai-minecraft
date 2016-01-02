@@ -32,15 +32,15 @@ class DistanceField(object):
         def safe_fmod(x, y):
             return math.fmod(math.fabs(x), y) - y / 2.0
         # Add simple noise to the coordinates to make it less rigid!
-        nx = safe_fmod(x, 64.0) + 2*math.sin(z/4.7)
-        nz = safe_fmod(z, 64.0) + 2*math.cos(x/5.9)
+        nx = safe_fmod(x, 64.0) + 2*math.sin(z/2.7)
+        nz = safe_fmod(z, 64.0) + 2*math.cos(x/2.9)
         ny = y + math.sin(0.75 + x/7.8 + z/9.1)
         #nx = math.fmod(math.fabs(x), 64.0) - 32.0
         #nz = z
         #ny = y
 
         # Distance field to center of map: floating iceberg.
-        if math.sqrt(nx*nx + nz*nz + 64*ny*ny) < 20:  # for comparison sqrt is not required
+        if math.sqrt(nx*nx + nz*nz + 16*ny*ny) < 20:  # for comparison sqrt is not required
             return c.MAT_DIRT
 
         # Anything that's not solid but under the sea level?
